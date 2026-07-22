@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Gesture Demo</title>
+  <style>
+    html,body{height:100%;margin:0;background:#111;color:#eee;font-family:Arial}
+    body{overflow:hidden}
+    #container{display:flex;align-items:center;justify-content:center;height:100%}
+    canvas{max-width:100%;height:auto;border:1px solid #222;background:#000}
+    #info{position:fixed;left:12px;top:12px;background:rgba(0,0,0,0.6);padding:8px 12px;border-radius:6px;z-index:20}
+    #status{position:fixed;left:12px;bottom:12px;background:rgba(0,0,0,0.6);padding:8px 12px;border-radius:6px;z-index:20;max-width:320px}
+    #cursor{position:fixed;left:0;top:0;width:24px;height:24px;pointer-events:none;z-index:50;transform:translate(-50%, -50%)}
+    #cursor::before{content:"";position:absolute;inset:0;border:2px solid #fff;border-radius:50%;box-shadow:0 0 0 2px rgba(0,0,0,0.25)}
+    #cursor::after{content:"";position:absolute;left:50%;top:50%;width:8px;height:8px;border-radius:50%;transform:translate(-50%, -50%);background:#ff4d4f}
+    #cursor.cursor-active::before{border-color:#4cd964}
+    #cursor.cursor-active::after{background:#34c759}
+  </style>
+</head>
+<body>
+  <div id="info">Gesture demo — your hand moves a browser cursor</div>
+  <div id="status">Loading camera and hand-tracking…</div>
+  <div id="cursor" aria-hidden="true"></div>
+  <div id="container">
+    <video id="video" playsinline style="display:none"></video>
+    <canvas id="output" width="1280" height="720"></canvas>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands/hands.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

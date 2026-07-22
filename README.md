@@ -18,12 +18,14 @@ A prototype application that uses a webcam and hand gestures to control the mous
 Install dependencies with:
 
 ```bash
-pip install opencv-python mediapipe pyautogui numpy
+pip install -r requirements.txt
 ```
 
 > On Windows, `pyautogui` may require additional modules such as `pillow` and `pygetwindow`.
 
 ## How to Run
+
+### Local Python app
 1. Open a terminal in the project folder.
 2. Run:
 
@@ -31,11 +33,50 @@ pip install opencv-python mediapipe pyautogui numpy
 python main.py
 ```
 
-3. Allow the webcam if prompted.
-4. Move your hand in front of the camera.
-5. Use the index finger to move the cursor.
-6. Pinch with thumb and index finger to type or click.
-7. Bring index and middle fingers close together and move vertically to scroll.
+### Streamlit web showcase
+1. Install requirements if you haven't already:
+
+```bash
+pip install -r requirements.txt
+```
+
+2. Start Streamlit:
+
+```bash
+streamlit run streamlit_app.py
+```
+
+3. Open the URL shown by Streamlit in your browser.
+
+4. Use the "Open the browser demo in a new tab" link if embedded webcam access is restricted.
+
+5. Allow the webcam if prompted.
+6. Move your hand in front of the camera.
+7. Use the index finger to move the cursor.
+8. Pinch with thumb and index finger to type or click.
+9. Bring index and middle fingers close together and move vertically to scroll.
+
+### Browser demo web showcase
+The `frontend/` folder contains a browser-based gesture demo using MediaPipe Hands. It is designed to run from a static web server or GitHub Pages.
+
+- Open `frontend/index.html` in a browser.
+- If the browser blocks camera access from a local file, serve the folder with a simple local host server:
+
+```bash
+cd frontend
+python -m http.server 8000
+```
+
+Then open `http://localhost:8000`.
+
+### Deploy to GitHub Pages
+This repository includes a GitHub Actions workflow at `.github/workflows/deploy.yml` that publishes the contents of `frontend/` to GitHub Pages on every push to `main` or `master`.
+
+1. Push your repository to GitHub.
+2. In the repository settings, enable GitHub Pages and select the `gh-pages` branch.
+3. The demo will be available at `https://<your-username>.github.io/<your-repository>/`.
+
+> Note: The browser demo is a frontend showcase only and does not remotely control the system mouse from the web page.
 
 ## How It Works
 - The app uses MediaPipe Hands to detect one hand and extract key landmarks.
